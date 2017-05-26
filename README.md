@@ -6,19 +6,19 @@ Use via [JitPack](https://jitpack.io/):
 
 - Include JitPack repository:
 ```
-	<repositories>
-		<repository>
-		    <id>jitpack.io</id>
-		    <url>https://jitpack.io</url>
-		</repository>
-	</repositories>
+<repositories>
+	<repository>
+		<id>jitpack.io</id>
+		<url>https://jitpack.io</url>
+	</repository>
+</repositories>
 ```
 
 - Add dependency:
 ```
 <dependency>
-	    <groupId>com.github.x-lin</groupId>
-	    <artifactId>Shaded-JIRA-Rest-Client</artifactId>
-	    <version>0.1.0</version>
-	</dependency>
+	<groupId>com.github.x-lin</groupId>
+	<artifactId>Shaded-JIRA-Rest-Client</artifactId>
+	<version>0.1.0</version>
+</dependency>
 ```
