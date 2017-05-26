@@ -6,7 +6,7 @@
 
     <artifactId>jira-rest-client-shaded</artifactId>
     <groupId>at.ac.tuwien.dst.mms</groupId>
-    <version>0.1.0-SNAPSHOT</version>
+    <version>0.1.0</version>
 
     <repositories>
         <repository>
@@ -51,7 +51,9 @@
                         <relocation>
                             <pattern>com</pattern>
                             <shadedPattern>at.ac.tuwien.dst.mms.jira.rest.shaded.com</shadedPattern>
-                            <excludes>com.atlassian.*</excludes>
+                            <excludes>
+								<exclude>com.atlassian.*</exclude>
+							</excludes>
                         </relocation>
                         <relocation>
                             <pattern>org</pattern>
