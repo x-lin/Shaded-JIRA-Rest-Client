@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
 import java.util.List;
 
 /**
@@ -22,13 +23,13 @@ public class RestClient {
 	/**
 	 * Sends a GET request.
 	 *
-	 * @param url the URL for the request to be sent to
+	 * @param uri the URL for the request to be sent to
 	 * @return
 	 * @throws IOException
 	 */
-	public static InputStream sendGet(String url) throws IOException {
+	public static InputStream sendGet(URI uri) throws IOException {
 		HttpClient client = HttpClientBuilder.create().build();
-		HttpGet request = new HttpGet(url);
+		HttpGet request = new HttpGet(uri);
 		HttpResponse response = client.execute(request);
 
 		return response.getEntity().getContent();
@@ -37,14 +38,14 @@ public class RestClient {
 	/**
 	 * Sends a POST request for a generic list.
 	 *
-	 * @param url
+	 * @param uri
 	 * @param requestEntity
 	 * @param <T>
 	 * @throws IOException
 	 */
-	public static <T> void sendPost(String url, List<T> requestEntity) throws IOException {
+	public static <T> void sendPost(URI uri, List<T> requestEntity) throws IOException {
 		Client c = Client.create();
-		WebResource resource = c.resource(url);
+		WebResource resource = c.resource(uri);
 
 		resource.post(requestEntity);
 	}
@@ -52,14 +53,14 @@ public class RestClient {
 	/**
 	 * Sends a POST request for a generic iterable.
 	 *
-	 * @param url
+	 * @param uri
 	 * @param requestEntity
 	 * @param <T>
 	 * @throws IOException
 	 */
-	public static <T> void sendPost(String url, Iterable<T> requestEntity) throws IOException {
+	public static <T> void sendPost(URI uri, Iterable<T> requestEntity) throws IOException {
 		Client c = Client.create();
-		WebResource resource = c.resource(url);
+		WebResource resource = c.resource(uri);
 
 		resource.post(requestEntity);
 	}
