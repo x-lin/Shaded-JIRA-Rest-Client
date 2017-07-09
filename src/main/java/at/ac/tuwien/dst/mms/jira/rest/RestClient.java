@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UncheckedIOException;
 import java.net.URI;
 import java.util.List;
 
@@ -25,14 +26,16 @@ public class RestClient {
 	 *
 	 * @param uri the URL for the request to be sent to
 	 * @return
-	 * @throws IOException
+	 * @throws UncheckedIOException
 	 */
-	public static InputStream sendGet(URI uri) throws IOException {
-		HttpClient client = HttpClientBuilder.create().build();
-		HttpGet request = new HttpGet(uri);
-		HttpResponse response = client.execute(request);
-
-		return response.getEntity().getContent();
+	public static InputStream sendGet(URI uri) {
+		try {
+			HttpClient client = HttpClientBuilder.create().build();
+			HttpGet request = new HttpGet(uri);
+            return client.execute(request).getEntity().getContent();
+		} catch ( IOException e ) {
+			throw new UncheckedIOException( e );
+		}
 	}
 
 	/**
@@ -41,9 +44,8 @@ public class RestClient {
 	 * @param uri
 	 * @param requestEntity
 	 * @param <T>
-	 * @throws IOException
 	 */
-	public static <T> void sendPost(URI uri, List<T> requestEntity) throws IOException {
+	public static <T> void sendPost(URI uri, List<T> requestEntity) {
 		Client c = Client.create();
 		WebResource resource = c.resource(uri);
 
@@ -56,9 +58,8 @@ public class RestClient {
 	 * @param uri
 	 * @param requestEntity
 	 * @param <T>
-	 * @throws IOException
 	 */
-	public static <T> void sendPost(URI uri, Iterable<T> requestEntity) throws IOException {
+	public static <T> void sendPost(URI uri, Iterable<T> requestEntity) {
 		Client c = Client.create();
 		WebResource resource = c.resource(uri);
 
